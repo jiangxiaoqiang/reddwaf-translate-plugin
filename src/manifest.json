@@ -13,22 +13,20 @@
   } ,
   "author" : "Jiangxiaoqiang <jiangtingqiang@gmail.com>" ,
   "permissions" : [
-    "<all_urls>" ,
     "contextMenus" ,
     "storage" ,
     "clipboardWrite" ,
     "clipboardRead" ,
-    "webRequest",
-    "webRequestBlocking"
+    "webRequest"
   ] ,
-  "popup" :{
-  },
-  "browser_action" : {
+  "action" : {
     "default_icon" : {
-      "19" : "/resource/image/logo.png" ,
-      "38" : "/resource/image/logo.png"
+      "16" : "resource/image/logo.png" ,
+      "24" : "resource/image/logo.png" ,
+      "32" : "resource/image/logo.png"
     } ,
-    "default_popup" : "/popup/popup.html"
+    "default_title": "Click Me", 
+    "default_popup" : "popup/popup.html"
   } ,
   "commands" : {
     "_execute_browser_action" : {
