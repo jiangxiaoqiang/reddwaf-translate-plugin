@@ -1,0 +1,55 @@
+﻿{
+  "name" : "红矮星翻译" ,
+  "description" : "红矮星翻译" ,
+  "manifest_version" : 3 ,
+  "version" : "0.0.1" ,
+  "homepage_url" : "https://github.com/jiangxiaoqiang/reddwaf-translate-plugin#readme" ,
+  "content_security_policy" :{
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "incognito": "split" ,
+  "icons" : {
+    "128" : "/resource/image/logo.png"
+  } ,
+  "author" : "Jiangxiaoqiang <jiangtingqiang@gmail.com>" ,
+  "permissions" : [
+    "<all_urls>" ,
+    "contextMenus" ,
+    "storage" ,
+    "clipboardWrite" ,
+    "clipboardRead" ,
+    "webRequest",
+    "webRequestBlocking"
+  ] ,
+  "popup" :{
+  },
+  "browser_action" : {
+    "default_icon" : {
+      "19" : "/resource/image/logo.png" ,
+      "38" : "/resource/image/logo.png"
+    } ,
+    "default_popup" : "/popup/popup.html"
+  } ,
+  "commands" : {
+    "_execute_browser_action" : {
+      "suggested_key" : {
+        "default" : "Ctrl+Q" ,
+        "mac" : "MacCtrl+Q"
+      }
+    } ,
+    "translate" : {
+      "suggested_key" : {
+        "default" : "Alt+A"
+      } ,
+      "description" : "翻译网页中选中的文本"
+    }
+  } ,
+  "minimum_chrome_version" : "29" ,
+  "web_accessible_resources" : [{
+    "resources": [
+      "/bundle/*.woff" ,
+      "/content-scripts/web/embed/*",
+      "/pdf-viewer/*"],
+      "matches": ["<all_urls>"]
+  }]
+}

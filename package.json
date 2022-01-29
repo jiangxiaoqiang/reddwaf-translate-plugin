@@ -1,0 +1,45 @@
+{
+  "name": "reddwaf-translate-plugin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "rm -rf src/bundle && webpack --mode development --config src/resource/config/webpack.dev.config.js",
+    "build": "gulp --cwd . --gulpfile build/gulp-build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiangxiaoqiang/reddwaf-translate-plugin.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jiangxiaoqiang/reddwaf-translate-plugin/issues"
+  },
+  "homepage": "https://github.com/jiangxiaoqiang/reddwaf-translate-plugin#readme",
+  "devDependencies": {
+    "@babel/core": "^7.16.12",
+    "@babel/preset-env": "^7.16.11",
+    "@vue/compiler-sfc": "^3.2.29",
+    "babel-loader": "^8.2.3",
+    "copy-webpack-plugin": "^10.2.1",
+    "css-loader": "^6.5.1",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.5.3",
+    "sass-loader": "^12.4.0",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.5",
+    "vue-loader": "^17.0.0",
+    "webpack": "^5.67.0",
+    "webpack-cli": "^4.9.2",
+    "process": "0.11.10"
+
+  },
+  "dependencies": {
+    "@types/chrome": "^0.0.177",
+    "sass": "^1.49.0",
+    "vue": "^3.2.29",
+    "vuex": "^4.0.2"
+  }
+}
