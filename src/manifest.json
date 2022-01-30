@@ -19,6 +19,9 @@
     "clipboardRead" ,
     "webRequest"
   ] ,
+  "host_permissions": [
+    "https://dict.poemhub.top/*"
+  ],
   "action" : {
     "default_icon" : {
       "16" : "resource/image/logo.png" ,
@@ -28,6 +31,9 @@
     "default_title": "Click Me", 
     "default_popup" : "popup/popup.html"
   } ,
+  "background": {
+    "service_worker": "background/background.js"
+  },
   "commands" : {
     "_execute_browser_action" : {
       "suggested_key" : {

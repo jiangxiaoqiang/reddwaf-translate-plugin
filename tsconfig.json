@@ -45,7 +45,11 @@
       "rootDirs": ["./"],
       "typeRoots": [
           "node_modules/@types", 
-          "src/@types"
+          "src/@types",
+      ],
+      "types": [
+        "chrome",
+        "node"
       ],
   
       // Source Maps

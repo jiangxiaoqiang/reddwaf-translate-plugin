@@ -7,7 +7,9 @@
 
   module.exports = {
     entry : {
-      'popup/popup' : './src/popup/' 
+      // https://stackoverflow.com/questions/70891730/is-it-possible-to-let-different-entry-package-to-different-output-path-in-webpac
+      'popup/popup' : './src/popup/',
+      'background/background': './src/background' 
     } ,
     resolve: {
       extensions: ['.tsx', '.ts', '.js'],
@@ -16,7 +18,7 @@
           vue: 'vue/dist/vue.esm-bundler.js',
           // https://stackoverflow.com/questions/65018431/webpack-5-uncaught-referenceerror-process-is-not-defined
           process: 'process/browser',
-          //'@': path.resolve(__dirname, 'src'),
+          '@': path.resolve(__dirname, 'src'),
       },
     },
     output : {
