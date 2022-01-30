@@ -1,5 +1,7 @@
 <template>
-<div id="app"></div>
+<div id="app">
+  <translator></translator>
+</div>
 </template>
 
 <script lang="ts">
@@ -14,7 +16,7 @@ export default defineComponent({
     }
   },
   components: {
-    Translator,
+    "translator":Translator,
   }
 })
 </script>
