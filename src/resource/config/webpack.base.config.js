@@ -18,7 +18,7 @@
           vue: 'vue/dist/vue.esm-bundler.js',
           // https://stackoverflow.com/questions/65018431/webpack-5-uncaught-referenceerror-process-is-not-defined
           process: 'process/browser',
-          '@': path.resolve(__dirname, 'src'),
+          //'@': path.resolve(__dirname, 'src'),
       },
     },
     output : {
