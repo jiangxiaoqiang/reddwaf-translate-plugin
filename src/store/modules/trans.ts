@@ -30,7 +30,7 @@ export default {
   actions: {
     async setUsername ({dispatch, commit, getters}: any, data: unknown) {
         debugger
-        commit('GET_USER_NAME', data)
+        commit('SET_USER_NAME', data)
     },
   },
 }

@@ -43,7 +43,7 @@
       </div>
     <div class="__translate-result__">
       <div>
-        <span>{{username}}</span>
+        <span>{{$store.state.Trans.username}}</span>
         <span class="__retry__" @click="safeTranslate">重试</span>
       </div>
       <div>
@@ -118,6 +118,9 @@ export default defineComponent({
       safeTranslate,
       username
     };
+  },
+  watch:{
+    
   },
   components: {
     //Options,
