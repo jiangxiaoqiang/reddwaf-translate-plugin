@@ -41,6 +41,34 @@
           </div>
         </div>
       </div>
+    <div class="__translate-result__">
+      <div>
+        <span>{{result}}</span>
+        <span class="__retry__" @click="safeTranslate">重试</span>
+      </div>
+      <div>
+        <div class="__phonetic__">
+          <span class="__copy-and-read__">
+            <span @click="play(query.text,query.from)">朗读</span>
+            <span @click="copy(result.phonetic,$event)">复制</span>
+            <span @click="addGlossary(query.text,query.from)">添加到单词本</span>
+          </span>
+        </div>
+        <div>
+          <ul>
+          </ul>
+          <div class="__copy-and-read__">
+            <span class="__copy-and-read__" @click="copy(result.dict,$event)">复制</span>
+          </div>
+        </div>
+        <div>
+          <div class="__copy-and-read__">
+            <span class="__copy-and-read__" @click="play(result.result,result.to)">朗读</span>
+            <span class="__copy-and-read__" @click="copy(result.result,$event)">复制</span>
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
 </template>
@@ -53,22 +81,39 @@ import { MessageType } from "../../../model/message/MessageType";
 export default defineComponent({
   setup() {
     const title = process.env.APP_NAME;
+    let result = "initial";
+
+    chrome.runtime.onMessage.addListener(
+        function(request, sender, sendResponse) {
+            if (request.msg === "something_completed") {
+                //  To do something
+                debugger;
+                console.log(request.data.content)
+                alert(request.data.content)
+                result = request.data.content
+            }
+        }
+    );
 
     const safeTranslate = () => {
       let transMe= MessageType[MessageType.TRANSLATE];
-      let mb : MessageBase = {
+      let message : MessageBase = {
         type: transMe,
-        data: "data"
+        data: {
+         word: "apple",
+         from: "en",
+         to: "zh"
+        }
       };
-      chrome.runtime.sendMessage(mb,function(response){
-        debugger
-        alert(response);
+      chrome.runtime.sendMessage(message,function(response){
+        
       });
     }
 
     return {
       title,
-      safeTranslate
+      safeTranslate,
+      result
     };
   },
   components: {
@@ -206,7 +251,7 @@ $baseFontHoverColor: #9a6a16;
 
     > .__query-form__ {
 
-      > st-div {
+      > div {
         margin-bottom: 5px;
         @extend %clear-fix;
 
@@ -275,7 +320,7 @@ $baseFontHoverColor: #9a6a16;
           @extend %clear-fix;
           display: none;
 
-          st-div {
+          div {
             width: 50%;
             float: left;
           }
@@ -291,19 +336,19 @@ $baseFontHoverColor: #9a6a16;
       .__phonetic__ {
         margin-bottom: 10px;
 
-        st-span:first-child {
+        span:first-child {
           margin-right: 5px;
         }
       }
 
-      .__copy-and-read__ > st-span, .__retry__ {
+      .__copy-and-read__ > span, .__retry__ {
         display: inline-block;
         margin-right: 10px;
         cursor: pointer;
         color: #12813e;
       }
 
-      .__copy-and-read__ > st-span {
+      .__copy-and-read__ > span {
         @extend %transition-all;
         height: 16px;
         line-height: 16px;
@@ -311,7 +356,7 @@ $baseFontHoverColor: #9a6a16;
         opacity: 0;
       }
 
-      &:hover .__copy-and-read__ > st-span {
+      &:hover .__copy-and-read__ > span {
         opacity: 1;
       }
     }
