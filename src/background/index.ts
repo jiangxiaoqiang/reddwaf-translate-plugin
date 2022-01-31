@@ -10,9 +10,9 @@ chrome.runtime.onMessage.addListener(function (request,sender,sendResponse){
 });
 
 function handleMessage(message: MessageBase){
-    //if(message.type === MessageType.TRANSLATE){
-    //    debugger;
-    //}
+    if(message.type === MessageType.TRANSLATE){
+        debugger;
+    }
 }
 
 
