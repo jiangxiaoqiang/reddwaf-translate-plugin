@@ -43,7 +43,7 @@
       </div>
     <div class="__translate-result__">
       <div>
-        <span>{{result}}</span>
+        <span>{{username}}</span>
         <span class="__retry__" @click="safeTranslate">重试</span>
       </div>
       <div>
@@ -74,23 +74,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 import type { MessageBase } from "@/model/message/MessageBase";
 import { MessageType } from "../../../model/message/MessageType";
+import { useStore } from 'vuex'
+
 
 export default defineComponent({
   setup() {
     const title = process.env.APP_NAME;
-    let result = "initial";
+    const { getters,dispatch } = useStore()
+    let username = computed(()=>getters['Trans/getUsername'])
 
     chrome.runtime.onMessage.addListener(
-        function(request, sender, sendResponse) {
+        async function(request, sender, sendResponse) {
             if (request.msg === "something_completed") {
-                //  To do something
-                debugger;
-                console.log(request.data.content)
-                alert(request.data.content)
-                result = request.data.content
+                let result = request.data.content
+                await dispatch(
+                  'Trans/setUsername',
+                  result
+                  )
             }
         }
     );
@@ -113,7 +116,7 @@ export default defineComponent({
     return {
       title,
       safeTranslate,
-      result
+      username
     };
   },
   components: {
