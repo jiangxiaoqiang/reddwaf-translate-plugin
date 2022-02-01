@@ -99,10 +99,8 @@ export default defineComponent({
     const emit = defineEmits(["update:modelValue"]);
 
     const title = process.env.APP_NAME;
-    const store = useStore()
     const { getters, dispatch } = useStore();
     let username = computed(() => getters["Trans/getUsername"]);
-
     chrome.runtime.onMessage.addListener(async function (
       request,
       sender,
@@ -122,12 +120,10 @@ export default defineComponent({
 
     computed({
       get() {
-        debugger;
         return props.modelValue;
       },
 
       set(value) {
-        debugger;
         return emit("update:modelValue", value);
       },
     });
@@ -138,13 +134,12 @@ export default defineComponent({
 
     const safeTranslate = () => {
       let transMe = MessageType[MessageType.TRANSLATE];
-      debugger
-      const transWord = computed(() => store.state.word)
-      if (transWord) {
+      const transWord = computed(() => getters["Trans/getTransWord"])
+      if (transWord && transWord.value && transWord.value.trim().length > 0) {
         let message: MessageBase = {
           type: transMe,
           data: {
-            word: transWord,
+            word: transWord.value,
             from: "en",
             to: "zh",
           },
