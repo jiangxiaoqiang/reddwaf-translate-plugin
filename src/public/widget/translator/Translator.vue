@@ -6,7 +6,11 @@
       </header>
       <div class="__query-form__">
         <div>
-          <textarea placeholder="输入要翻译的句子或单词"></textarea>
+          <textarea
+            :value="modelValue"
+            v-on:input="updateValue($event.target.value)"
+            placeholder="输入要翻译的句子或单词"
+          ></textarea>
         </div>
         <div>
           <select>
@@ -41,90 +45,123 @@
           </div>
         </div>
       </div>
-    <div class="__translate-result__">
-      <div>
-        <span>{{$store.state.Trans.username}}</span>
-        <span class="__retry__" @click="safeTranslate">重试</span>
-      </div>
-      <div>
-        <div class="__phonetic__">
-          <span class="__copy-and-read__">
-            <span @click="play(query.text,query.from)">朗读</span>
-            <span @click="copy(result.phonetic,$event)">复制</span>
-            <span @click="addGlossary(query.text,query.from)">添加到单词本</span>
-          </span>
+      <div class="__translate-result__">
+        <div>
+          <span>{{ $store.state.Trans.username }}</span>
+          <span class="__retry__" @click="safeTranslate">重试</span>
         </div>
         <div>
-          <ul>
-          </ul>
-          <div class="__copy-and-read__">
-            <span class="__copy-and-read__" @click="copy(result.dict,$event)">复制</span>
+          <div class="__phonetic__">
+            <span class="__copy-and-read__">
+              <span @click="play(query.text, query.from)">朗读</span>
+              <span @click="copy(result.phonetic, $event)">复制</span>
+              <span @click="addGlossary(query.text, query.from)"
+                >添加到单词本</span
+              >
+            </span>
           </div>
-        </div>
-        <div>
-          <div class="__copy-and-read__">
-            <span class="__copy-and-read__" @click="play(result.result,result.to)">朗读</span>
-            <span class="__copy-and-read__" @click="copy(result.result,$event)">复制</span>
+          <div>
+            <ul></ul>
+            <div class="__copy-and-read__">
+              <span class="__copy-and-read__" @click="copy(result.dict, $event)"
+                >复制</span
+              >
+            </div>
+          </div>
+          <div>
+            <div class="__copy-and-read__">
+              <span
+                class="__copy-and-read__"
+                @click="play(result.result, result.to)"
+                >朗读</span
+              >
+              <span
+                class="__copy-and-read__"
+                @click="copy(result.result, $event)"
+                >复制</span
+              >
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, defineEmits, defineProps } from "vue";
 import type { MessageBase } from "@/model/message/MessageBase";
-import { MessageType } from "../../../model/message/MessageType";
-import { useStore } from 'vuex'
-
+import { MessageType } from "@/model/message/MessageType";
+import { useStore } from "vuex";
 
 export default defineComponent({
   setup() {
-    const title = process.env.APP_NAME;
-    const { getters,dispatch } = useStore()
-    let username = computed(()=>getters['Trans/getUsername'])
+    const emit = defineEmits(["update:modelValue"]);
 
-    chrome.runtime.onMessage.addListener(
-        async function(request, sender, sendResponse) {
-            if (request.msg === "something_completed") {
-                let result = request.data.content
-                await dispatch(
-                  'Trans/setUsername',
-                  result
-                  )
-            }
-        }
-    );
+    const title = process.env.APP_NAME;
+    const store = useStore()
+    const { getters, dispatch } = useStore();
+    let username = computed(() => getters["Trans/getUsername"]);
+
+    chrome.runtime.onMessage.addListener(async function (
+      request,
+      sender,
+      sendResponse
+    ) {
+      if (request.msg === "something_completed") {
+        let result = request.data.content;
+        await dispatch("Trans/setUsername", result);
+      }
+    });
+    const props = defineProps({
+      modelValue: {
+        type: [String, Number],
+        default: "",
+      },
+    });
+
+    computed({
+      get() {
+        debugger;
+        return props.modelValue;
+      },
+
+      set(value) {
+        debugger;
+        return emit("update:modelValue", value);
+      },
+    });
+
+    const updateValue = async (value: string) => {
+      await dispatch("Trans/setTransword", value);
+    };
 
     const safeTranslate = () => {
-      let transMe= MessageType[MessageType.TRANSLATE];
-      let message : MessageBase = {
-        type: transMe,
-        data: {
-         word: "apple",
-         from: "en",
-         to: "zh"
-        }
-      };
-      chrome.runtime.sendMessage(message,function(response){
-        
-      });
-    }
+      let transMe = MessageType[MessageType.TRANSLATE];
+      debugger
+      const transWord = computed(() => store.state.word)
+      if (transWord) {
+        let message: MessageBase = {
+          type: transMe,
+          data: {
+            word: transWord,
+            from: "en",
+            to: "zh",
+          },
+        };
+        chrome.runtime.sendMessage(message, function (response) {});
+      }
+    };
 
     return {
       title,
       safeTranslate,
-      username
+      username,
+      updateValue,
     };
   },
-  watch:{
-    
-  },
-  components: {
-    //Options,
-  },
+  watch: {},
+  components: {},
 });
 </script>
 
@@ -136,7 +173,7 @@ $baseFontColor: #fff;
 $baseFontHoverColor: #9a6a16;
 
 %transition-all {
-  transition: all .2s;
+  transition: all 0.2s;
 }
 
 %clear-fix {
@@ -156,8 +193,9 @@ $baseFontHoverColor: #9a6a16;
 }
 
 @mixin apply-to-icon {
-  [class^="st-icon-"], [class*=" st-icon-"] {
-    @content
+  [class^="st-icon-"],
+  [class*=" st-icon-"] {
+    @content;
   }
 }
 
@@ -189,12 +227,13 @@ $baseFontHoverColor: #9a6a16;
     height: 46px;
     min-height: 46px;
   }
-  
+
   @include apply-to-icon {
     color: $baseFontColor;
     cursor: pointer;
 
-    &:not(.st-icon-down-dir), &:not(.st-icon-down-dir)::before {
+    &:not(.st-icon-down-dir),
+    &:not(.st-icon-down-dir)::before {
       @extend %transition-all;
     }
 
@@ -203,23 +242,26 @@ $baseFontHoverColor: #9a6a16;
     }
   }
 
-
- > .__st-box__ {
+  > .__st-box__ {
     width: 250px;
     background-color: $baseBackgroundColor;
     border: 1px solid $baseBackgroundColor;
 
-    .__action-list__, select, textarea {
+    .__action-list__,
+    select,
+    textarea {
       border: 0;
       border-radius: 0;
       padding: 0;
     }
 
-    select, .__action-list__ {
+    select,
+    .__action-list__ {
       width: 45%;
     }
 
-    select, .__action-list__ {
+    select,
+    .__action-list__ {
       @extend %base-line-height;
     }
 
@@ -229,7 +271,8 @@ $baseFontHoverColor: #9a6a16;
       cursor: move;
       padding: 8px 0;
 
-      .st-icon-pin::before, .st-icon-down-open::before {
+      .st-icon-pin::before,
+      .st-icon-down-open::before {
         transform: translateY(0) rotate(0deg);
       }
       .__pinned__.st-icon-pin::before {
@@ -240,7 +283,8 @@ $baseFontHoverColor: #9a6a16;
         transform: translateY(2px) rotate(-180deg);
       }
 
-      .st-icon-cog, .st-icon-down-open {
+      .st-icon-cog,
+      .st-icon-down-open {
         float: right;
       }
 
@@ -256,7 +300,6 @@ $baseFontHoverColor: #9a6a16;
     }
 
     > .__query-form__ {
-
       > div {
         margin-bottom: 5px;
         @extend %clear-fix;
@@ -347,7 +390,8 @@ $baseFontHoverColor: #9a6a16;
         }
       }
 
-      .__copy-and-read__ > span, .__retry__ {
+      .__copy-and-read__ > span,
+      .__retry__ {
         display: inline-block;
         margin-right: 10px;
         cursor: pointer;
@@ -372,7 +416,8 @@ $baseFontHoverColor: #9a6a16;
       padding: 5px 10px;
       text-align: right;
 
-      &, & a {
+      &,
+      & a {
         color: $baseFontColor;
       }
       a {
@@ -395,9 +440,5 @@ $baseFontHoverColor: #9a6a16;
     cursor: pointer;
     background-color: $baseBackgroundColor;
   }
-
-
-
 }
 </style>
-
