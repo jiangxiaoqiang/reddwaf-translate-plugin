@@ -1,9 +1,9 @@
 <template>
-    <div>I am a pop</div>
+    <div id="app">I am a pop</div>
 </template>
 
 <script>
-import { defineComponent } from '@vue/composition-api'
+import { defineComponent } from "vue"
 
 export default defineComponent({
     setup() {
