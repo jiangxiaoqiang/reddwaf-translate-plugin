@@ -6,9 +6,13 @@ const selection = getSelection();
 
 export async function firstMouseUp(e: MouseEvent){
     if(selection && selection.toString().trim().length>0){
+        let reddwarfTranslateDiv = document.createElement("div");
+        reddwarfTranslateDiv.id = "uniq-anchor-point";
+        document.body.appendChild(reddwarfTranslateDiv);
         const app = createApp(TranslatorPop);
         app.use(store);
-        let vm = app.mount("#app");
-        document.querySelector('body')?.appendChild(vm.$el)
+        debugger;
+        let vm = app.mount("#uniq-anchor-point");
+        document.body.appendChild(vm.$el)
     }
 }

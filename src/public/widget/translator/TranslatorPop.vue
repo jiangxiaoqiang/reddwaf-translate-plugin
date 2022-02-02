@@ -1,5 +1,5 @@
 <template>
-    <div id="app">I am a pop</div>
+    <div id="reddwarf-translate-app">I am a pop1</div>
 </template>
 
 <script>
