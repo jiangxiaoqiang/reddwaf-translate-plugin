@@ -9,8 +9,8 @@ const selection = getSelection();
 export async function firstMouseUp(e: MouseEvent) {
   if (selection && selection.toString().trim().length > 0) {
     let transWord:string = selection.toString().trim();
-    addTransShowElement(transWord);
-    doTranslate(transWord, MessageType.SELECTION_TRANSLATE);
+    addTransShowElement(transWord.toLowerCase());
+    doTranslate(transWord.toLowerCase(), MessageType.SELECTION_TRANSLATE);
   }
 }
 
