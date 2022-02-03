@@ -6,7 +6,13 @@
 import { defineComponent } from "vue"
 
 export default defineComponent({
-    setup() {
+    props:{
+        word: String
+    },
+    setup(props) {
+        alert(props.word);
+
+        
         
     },
 })

@@ -9,7 +9,10 @@ export async function firstMouseUp(e: MouseEvent){
         let reddwarfTranslateDiv = document.createElement("div");
         reddwarfTranslateDiv.id = "uniq-anchor-point";
         document.body.appendChild(reddwarfTranslateDiv);
-        const app = createApp(TranslatorPop);
+        let props = {
+            word: selection.toString().trim()
+        };
+        const app = createApp(TranslatorPop,props);
         app.use(store);
         debugger;
         let vm = app.mount("#uniq-anchor-point");
