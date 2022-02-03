@@ -37,7 +37,8 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content/content.js"]
+      "js": ["content/content.js"],
+      "css":["content/content.css"]
     }
   ],
   "commands" : {
@@ -59,7 +60,9 @@
     "resources": [
       "/bundle/*.woff" ,
       "/content-scripts/web/embed/*",
-      "/pdf-viewer/*"],
+      "/pdf-viewer/*",
+      "/resource/*"
+    ],
       "matches": ["<all_urls>"]
   }]
 }
