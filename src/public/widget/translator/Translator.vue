@@ -90,9 +90,9 @@
 
 <script lang="ts">
 import { computed, defineComponent, defineEmits, defineProps } from "vue";
-import type { MessageBase } from "@/model/message/MessageBase";
 import { MessageType } from "@/model/message/MessageType";
 import { useStore } from "vuex";
+import { doTranslate } from "@/public/action/TransAction";
 
 export default defineComponent({
   setup() {
@@ -133,18 +133,9 @@ export default defineComponent({
     };
 
     const safeTranslate = () => {
-      let transMe = MessageType[MessageType.TRANSLATE];
       const transWord = computed(() => getters["Trans/getTransWord"])
       if (transWord && transWord.value && transWord.value.trim().length > 0) {
-        let message: MessageBase = {
-          type: transMe,
-          data: {
-            word: transWord.value,
-            from: "en",
-            to: "zh",
-          },
-        };
-        chrome.runtime.sendMessage(message, function (response) {});
+        doTranslate(transWord.value.trim(),MessageType.TRANSLATE);
       }
     };
 

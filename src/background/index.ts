@@ -1,6 +1,6 @@
 import { MessageType } from '@/model/message/MessageType';
 import type { MessageBase } from '@/model/message/MessageBase';
-import { handleTransImpl } from '@/background/biz/handler/TransHandler';
+import { handleSelectionTransImpl, handleTransImpl } from '@/background/biz/handler/TransHandler';
 
 chrome.runtime.onMessage.addListener(function (request: MessageBase,sender,sendResponse){
     handleMessage(request);  
@@ -10,6 +10,9 @@ chrome.runtime.onMessage.addListener(function (request: MessageBase,sender,sendR
 function handleMessage(message: MessageBase){
     if(message.type === MessageType.TRANSLATE){
         handleTransImpl(message);
+    }
+    if(message.type === MessageType.SELECTION_TRANSLATE){
+        handleSelectionTransImpl(message);
     }
 }
 
