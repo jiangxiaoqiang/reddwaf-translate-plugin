@@ -16,6 +16,9 @@ function handleMessage(message: MessageBase){
     }
 }
 
-
+chrome.tabs.onUpdated.addListener(function(tabId, info, tab){
+    console.log("update.....");
+    chrome.runtime.reload();
+});
 
 

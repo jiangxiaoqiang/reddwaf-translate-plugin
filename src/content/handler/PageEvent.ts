@@ -1,29 +1,39 @@
 import TranslatorPop from "@/public/widget/translator/TranslatorPop.vue";
 import { createApp } from "vue";
 import store from "@/store";
-import { doTranslate } from "@/public/action/TransAction";
-import { MessageType } from "@/model/message/MessageType";
+//import { doTranslate } from "@/public/action/TransAction";
+//import { MessageType } from "@/model/message/MessageType";
 
+const MOUSE_UP = 'mouseup'
 const selection = getSelection();
 
 export async function firstMouseUp(e: MouseEvent) {
   if (selection && selection.toString().trim().length > 0) {
+    // removeFirstMouseUp();
     let transWord:string = selection.toString().trim();
     addTransShowElement(transWord.toLowerCase());
     showTranslateButton(e);
-    doTranslate(transWord.toLowerCase(), MessageType.SELECTION_TRANSLATE);
   }
 }
 
+export function noop() {}
+
+export function removeFirstMouseUp() {
+  document.removeEventListener( MOUSE_UP , firstMouseUp );
+  return noop;
+}
 
 export function showTranslateButton(e: MouseEvent){
   let translateBtn = document.getElementById("translate-btn");
   if(translateBtn){
+    if(translateBtn.style.visibility == "visible"){
+      return;
+    }
+    translateBtn.style.visibility="visible";
     translateBtn.style.width ="40px";  
-    translateBtn.style.backgroundColor="red";
+    translateBtn.style.backgroundColor="transparent";
     translateBtn.style.height="50px";
     translateBtn.style.transform="translate("+e.pageX+ "px,"+ e.pageY+"px)";
-    //translateBtn.style.transform=translateX(e.pageX);
   }
 }
 

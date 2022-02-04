@@ -1,7 +1,7 @@
 <template>
-  <div id="reddwarf-translate-app">I am a prop
+  <div id="reddwarf-translate-app">
     <div id="translate-btn">
-      <button type="button" class="translate-pop-button">
+      <button type="button" class="translate-pop-button" @click="safeTranslate">
         <span class="reddwarf-btn-icon"></span>
       </button>
     </div>
@@ -17,17 +17,31 @@
 <script>
 import { doTranslate } from "@/public/action/TransAction";
 import { MessageType } from "@/model/message/MessageType";
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
+import { useStore } from "vuex";
 
 export default defineComponent({
   props: {
     word: String,
   },
   setup(props) {
-    if (props && props.word && props.word.trim().length > 0) {
-      
+    const { getters, dispatch } = useStore();
+
+    if(props.word&&props.word.trim().length>0) {
+      dispatch("Trans/setTransword", props.word.trim());
     }
-  },
+
+    const safeTranslate = () => {
+      const transWord = computed(() => getters["Trans/getTransWord"])
+      if (transWord && transWord.value && transWord.value.trim().length > 0) {
+        doTranslate(transWord.value.trim(),MessageType.SELECTION_TRANSLATE);
+      }
+    };
+
+    return {
+      safeTranslate
+    };
+  }
 });
 </script>
 
@@ -44,8 +58,8 @@ export default defineComponent({
 #translate-btn .reddwarf-btn-icon{
   width: 18px;
   height: 28px;
-  background-image: url('chrome-extension://__MSG_@@extension_id__/resource/image/logo.png');
-  background-color: #000000;
+  background-image: url('chrome-extension://__MSG_@@extension_id__/resource/image/lo.jpg');
+  background-color: transparent;
 
 }
 
@@ -53,8 +67,8 @@ export default defineComponent({
   width: 28px;
   height: 28px;
   background:transparent;
-  background-image: url('chrome-extension://__MSG_@@extension_id__/resource/image/logo.png');
-  background-color: #000000;
+  background-image: url('chrome-extension://__MSG_@@extension_id__/resource/image/lo.jpg');
+  background-color:transparent;
 }
 
 </style>
