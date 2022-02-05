@@ -8,7 +8,9 @@
     <div id="pop-container">
       <div id="translate-panel">
         <div class="header"></div>
-        <div class="body"></div>
+        <div class="body">
+          <div id="reddwarf-translate-result"></div>
+        </div>
       </div>
     </div>
   </div>

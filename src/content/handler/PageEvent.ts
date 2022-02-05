@@ -7,10 +7,22 @@ const selection = getSelection();
 
 export async function firstMouseUp(e: MouseEvent) {
   if (selection && selection.toString().trim().length > 0) {
+    removeFirstMouseUp();
     let transWord:string = selection.toString().trim();
     addTransShowElement(transWord.toLowerCase());
     showTranslateButton(e);
+    delay(2000,null).then(() =>{
+      hideTransButton();
+    }).then(()=>{
+      addFirstMouseUp();
+    })
   }
+}
+
+function delay(time:number, value:any) {
+  return new Promise(function(resolve) { 
+      setTimeout(resolve.bind(null, value), time)
+  });
 }
 
 export function noop() {}
@@ -18,6 +30,19 @@ export function noop() {}
 export function removeFirstMouseUp() {
   document.removeEventListener( MOUSE_UP , firstMouseUp );
   return noop;
+}
+
+export function addFirstMouseUp() {
+  document.addEventListener( MOUSE_UP , firstMouseUp );
+}
+
+export function hideTransButton(){
+  let translateBtn = document.getElementById("translate-btn");
+  if(translateBtn){
+    if(translateBtn.style.visibility == "visible"){
+      translateBtn.style.visibility = "hidden";
+    }
+  }
 }
 
 export function showTranslateButton(e: MouseEvent){
@@ -37,12 +62,20 @@ export function showTranslateButton(e: MouseEvent){
 export async function addTransShowElement(translation:string){
   let anchorElementId = "uniq-anchor-point";
   let anchorElement = document.getElementById(anchorElementId);
+  if(anchorElement){
+    document.getElementById("uniq-anchor-point")?.remove();
+    anchorElement = null;
+  }
   if (anchorElement == null || anchorElement === undefined) {
     let reddwarfTranslateDiv = document.createElement("div");
     reddwarfTranslateDiv.id = anchorElementId;
     document.body.appendChild(reddwarfTranslateDiv);
   }
   let appElement = document.getElementById("reddwarf-translate-app");
+  if(appElement){
+    document.getElementById("reddwarf-translate-app")?.remove();
+    appElement = null;
+  }
   if (appElement == null || appElement === undefined) {
     let props = {
       word: translation.toString().trim(),
@@ -65,11 +98,18 @@ export async function showSelectionTrans(translation: string) {
 export function showTranslateResultPanel(translation: string) {
   let translateBtn = document.getElementById("translate-panel");
   if(translateBtn){
-    if(translateBtn.style.visibility == "visible"){
-      return;
-    }
     translateBtn.style.visibility="visible";
     translateBtn.style.zIndex="99999";
-    translateBtn.style.backgroundColor="red";
+    translateBtn.style.backgroundColor="white";
+    setTransResult(translation);
   }
 }
+
+export function setTransResult(translateResult: string) {
+  let transResultDiv = document.getElementById("reddwarf-translate-result");
+  if(transResultDiv){
+    transResultDiv.innerHTML=translateResult;
+  }
+}
+
+
