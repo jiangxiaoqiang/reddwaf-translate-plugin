@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export function api<T>(url: string): Promise<T> {
-    debugger
     return fetch(url)
         .then(response => {
         if (!response.ok) {

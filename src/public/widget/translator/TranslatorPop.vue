@@ -14,7 +14,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { doTranslate } from "@/public/action/TransAction";
 import { MessageType } from "@/model/message/MessageType";
 import { defineComponent, computed } from "vue";
@@ -31,12 +31,24 @@ export default defineComponent({
       dispatch("Trans/setTransword", props.word.trim());
     }
 
-    const safeTranslate = () => {
+    const safeTranslate = (e: MouseEvent) => {
       const transWord = computed(() => getters["Trans/getTransWord"])
       if (transWord && transWord.value && transWord.value.trim().length > 0) {
         doTranslate(transWord.value.trim(),MessageType.SELECTION_TRANSLATE);
+        setTranslateResultPosition(e);
       }
     };
+
+    const setTranslateResultPosition = (e:MouseEvent) => {
+      let translateBtn = document.getElementById("translate-panel");
+      if(translateBtn){
+        translateBtn.style.visibility="hidden";
+        translateBtn.style.width ="140px";  
+        translateBtn.style.backgroundColor="transparent";
+        translateBtn.style.height="150px";
+        translateBtn.style.transform="translate("+e.clientX+ "px,"+ e.clientY+"px)";
+      }
+    }
 
     return {
       safeTranslate
@@ -45,14 +57,21 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+
+#translate-panel{
+  position: absolute;
+  z-index: 9999999999;
+  left: 0;
+  top: 0;
+}
 
 #translate-btn {
-    //display: none;
-    position: absolute;
-    z-index: 9999999999;
-    left: 0;
-    top: 0;
+  //display: none;
+  position: absolute;
+  z-index: 9999999999;
+  left: 0;
+  top: 0;
 }
 
 #translate-btn .reddwarf-btn-icon{

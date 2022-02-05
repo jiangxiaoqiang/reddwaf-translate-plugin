@@ -1,15 +1,12 @@
 import TranslatorPop from "@/public/widget/translator/TranslatorPop.vue";
 import { createApp } from "vue";
 import store from "@/store";
-//import { doTranslate } from "@/public/action/TransAction";
-//import { MessageType } from "@/model/message/MessageType";
 
 const MOUSE_UP = 'mouseup'
 const selection = getSelection();
 
 export async function firstMouseUp(e: MouseEvent) {
   if (selection && selection.toString().trim().length > 0) {
-    // removeFirstMouseUp();
     let transWord:string = selection.toString().trim();
     addTransShowElement(transWord.toLowerCase());
     showTranslateButton(e);
@@ -60,6 +57,19 @@ export async function addTransShowElement(translation:string){
 export async function showSelectionTrans(translation: string) {
   if (translation && translation.toString().trim().length > 0) {
     addTransShowElement(translation.toString().trim());
-    alert(translation);
+    showTranslateResultPanel(translation);
+  }
+}
+
+
+export function showTranslateResultPanel(translation: string) {
+  let translateBtn = document.getElementById("translate-panel");
+  if(translateBtn){
+    if(translateBtn.style.visibility == "visible"){
+      return;
+    }
+    translateBtn.style.visibility="visible";
+    translateBtn.style.zIndex="99999";
+    translateBtn.style.backgroundColor="red";
   }
 }
