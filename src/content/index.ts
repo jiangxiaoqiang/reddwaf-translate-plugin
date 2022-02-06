@@ -1,10 +1,10 @@
-import { firstMouseUp } from "@/content/handler/PageEvent";
+import { firstMouseUp, mouseClick } from "@/content/handler/PageEvent";
+import { TransGlobal } from "@/model/immutable/TransGlobal";
 import { MessageType } from '@/model/message/MessageType';
 import { showSelectionTrans } from "@/public/action/TransAction";
 
-const MOUSE_UP = "mouseup";
-
-document.addEventListener(MOUSE_UP, firstMouseUp);
+document.addEventListener(TransGlobal.MOUSE_UP, firstMouseUp);
+document.addEventListener(TransGlobal.MOUSE_CLICK, mouseClick);
 
 chrome.runtime.onMessage.addListener(async function (
   request,

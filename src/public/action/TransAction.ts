@@ -103,3 +103,11 @@ export function showTranslateButton(e: MouseEvent){
     translateBtn.style.transform="translate("+e.pageX+ "px,"+ e.pageY+"px)";
   }
 }
+
+export function closePopupWindow(){
+  let translateBtn = document.getElementById("reddwarf-translate-app");
+  if(translateBtn){
+    translateBtn.remove();
+  }
+}
+

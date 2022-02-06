@@ -28,7 +28,12 @@
 </template>
 
 <script lang="ts">
-import { doTranslate, hideTransButton, setTranslateResultPosition } from "@/public/action/TransAction";
+import { 
+  closePopupWindow, 
+  doTranslate, 
+  hideTransButton, 
+  setTranslateResultPosition 
+} from "@/public/action/TransAction";
 import { MessageType } from "@/model/message/MessageType";
 import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
@@ -54,10 +59,7 @@ export default defineComponent({
     };
 
     const closePopWindow = (e: MouseEvent) => {
-      let translateBtn = document.getElementById("reddwarf-translate-app");
-      if(translateBtn){
-        translateBtn.remove();
-      }
+      closePopupWindow();
     }
 
     return {
@@ -103,10 +105,4 @@ export default defineComponent({
 
 </style>
 
-function setTranslateResultPosition(e: MouseEvent) {
-  throw new Error("Function not implemented.");
-}
 
-function setTranslateResultPosition(e: MouseEvent) {
-  throw new Error("Function not implemented.");
-}
