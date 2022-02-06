@@ -1,5 +1,6 @@
-import { firstMouseUp, showSelectionTrans } from "@/content/handler/PageEvent";
+import { firstMouseUp } from "@/content/handler/PageEvent";
 import { MessageType } from '@/model/message/MessageType';
+import { showSelectionTrans } from "@/public/action/TransAction";
 
 const MOUSE_UP = "mouseup";
 

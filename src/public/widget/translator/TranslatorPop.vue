@@ -7,7 +7,18 @@
     </div>
     <div id="pop-container">
       <div id="translate-panel">
-        <div class="header"></div>
+        <div class="header">
+          <div class="left"></div>
+          <div class="right">
+            <button type="button" title="关闭" @click="closePopWindow">
+              <span icon="cross">
+                <svg data-icon="cross" width="18" height="18" viewBox="0 0 16 16">
+                  <path d="M9.41 8l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 00-1.71-.71L8 6.59l-3.29-3.3a1.003 1.003 0 00-1.42 1.42L6.59 8 3.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 001.71.71L8 9.41l3.29 3.29c.18.19.43.3.71.3a1.003 1.003 0 00.71-1.71L9.41 8z" fill-rule="evenodd"></path>
+                </svg>
+              </span>
+            </button>
+          </div>
+        </div>
         <div class="body">
           <div id="reddwarf-translate-result"></div>
         </div>
@@ -17,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { doTranslate } from "@/public/action/TransAction";
+import { doTranslate, hideTransButton, setTranslateResultPosition } from "@/public/action/TransAction";
 import { MessageType } from "@/model/message/MessageType";
 import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
@@ -36,24 +47,22 @@ export default defineComponent({
     const safeTranslate = (e: MouseEvent) => {
       const transWord = computed(() => getters["Trans/getTransWord"])
       if (transWord && transWord.value && transWord.value.trim().length > 0) {
+        hideTransButton();
         doTranslate(transWord.value.trim(),MessageType.SELECTION_TRANSLATE);
         setTranslateResultPosition(e);
       }
     };
 
-    const setTranslateResultPosition = (e:MouseEvent) => {
-      let translateBtn = document.getElementById("translate-panel");
+    const closePopWindow = (e: MouseEvent) => {
+      let translateBtn = document.getElementById("reddwarf-translate-app");
       if(translateBtn){
-        translateBtn.style.visibility="hidden";
-        translateBtn.style.width ="140px";  
-        translateBtn.style.backgroundColor="transparent";
-        translateBtn.style.height="150px";
-        translateBtn.style.transform="translate("+e.clientX+ "px,"+ e.clientY+"px)";
+        translateBtn.remove();
       }
     }
 
     return {
-      safeTranslate
+      safeTranslate,
+      closePopWindow
     };
   }
 });
@@ -93,3 +102,11 @@ export default defineComponent({
 }
 
 </style>
+
+function setTranslateResultPosition(e: MouseEvent) {
+  throw new Error("Function not implemented.");
+}
+
+function setTranslateResultPosition(e: MouseEvent) {
+  throw new Error("Function not implemented.");
+}
