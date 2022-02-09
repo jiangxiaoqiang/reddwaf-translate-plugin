@@ -2,7 +2,11 @@
 // * https://www.typescriptlang.org/tsconfig
 // * https://www.typescriptlang.org/ja/tsconfig
 {
-    "include": ["./src/**/*.ts", "./src/**/*.vue", "./src/@types/**/*.ts"],
+    "include": [
+      "./src/**/*.ts", 
+      "./src/**/*.vue", 
+      "./src/@types/**/*.ts", 
+    ],
     "exclude": ["node_modules"],
     "compilerOptions": {
       // Project Options
@@ -39,7 +43,10 @@
       "esModuleInterop": true,
       "moduleResolution": "node",
       "paths": {
-        "@/*": ["src/*"]
+        "@/*": [
+          "src/*",
+          "node_modules/js-wheel"
+        ]
       },
       "preserveSymlinks": false,
       "rootDirs": ["./"],

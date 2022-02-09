@@ -19,6 +19,21 @@ export function doTranslate(transWord: string, messageType: MessageType){
       }
 }
 
+export function doAddGlossary(transWord: string, messageType: MessageType){
+  let transMe = MessageType[messageType];
+    if (transWord && transWord.length > 0) {
+      let message: MessageBase = {
+        type: transMe,
+        data: {
+          word: transWord,
+          from: "en",
+          to: "zh",
+        },
+      };
+      chrome.runtime.sendMessage(message, function (response) {});
+    }
+}
+
 export function setTranslateResultPosition (e:MouseEvent) {
   let translateBtn = document.getElementById("translate-panel");
   if(translateBtn){

@@ -1,5 +1,5 @@
   const path = require('path');
-  const webpack = require( 'webpack' );
+  const webpack = require('webpack');
   const MiniCssExtractPlugin = require( 'mini-css-extract-plugin');
   const HtmlWebpackPlugin = require( 'html-webpack-plugin');
   const CopyPlugin = require("copy-webpack-plugin");
@@ -35,6 +35,10 @@
           options: {
             appendTsSuffixTo: [/\.vue$/]
           },
+          include: [
+            path.resolve(__dirname, '../../../node_modules/js-wheel'),
+            path.resolve(__dirname, '../../../src')
+          ],
           exclude: /node_modules|\.d\.ts$/
         },
         {

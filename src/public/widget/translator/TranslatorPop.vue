@@ -10,6 +10,11 @@
         <div class="header">
           <div class="left"></div>
           <div class="right">
+            <button type="button" title="添加到收藏夹" @click="addGlossary">
+              <span icon="star-empty">
+                <svg data-icon="star-empty" width="14" height="14" viewBox="0 0 16 16"></svg>
+              </span>
+            </button>
             <button type="button" title="关闭" @click="closePopWindow">
               <span icon="cross">
                 <svg data-icon="cross" width="18" height="18" viewBox="0 0 16 16">
@@ -30,6 +35,7 @@
 <script lang="ts">
 import { 
   closePopupWindow, 
+  doAddGlossary, 
   doTranslate, 
   hideTransButton, 
   setTranslateResultPosition 
@@ -62,9 +68,17 @@ export default defineComponent({
       closePopupWindow();
     }
 
+    const addGlossary = (e: MouseEvent) => {
+      const transWord = computed(() => getters["Trans/getTransWord"])
+      if (transWord && transWord.value && transWord.value.trim().length > 0) {
+        doAddGlossary(transWord.value.trim(),MessageType.ADD_GLOSSARY);
+      }
+    }
+
     return {
       safeTranslate,
-      closePopWindow
+      closePopWindow,
+      addGlossary
     };
   }
 });
