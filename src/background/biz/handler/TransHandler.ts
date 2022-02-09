@@ -5,7 +5,7 @@ import { dictBaseUrl } from "@/resource/config/app.config";
 import { MessageType } from "@/model/message/MessageType";
 import { sendMessageToContent } from "@/public/action/MessageInteractive";
 // https://stackoverflow.com/questions/71046998/what-is-the-difference-about-import-import-import-as-in-typescript
-import{demo} from "js-wheel/dist/index";
+import ResponseHandler from "js-wheel/dist/src/net/rest/ResponseHandler";
 
 export function handleTransImpl(message: MessageBase) {
   let url:string = dictBaseUrl + "/word/translate/v1/trans";
@@ -23,15 +23,16 @@ export function handleTransImpl(message: MessageBase) {
 export function handleSelectionTransImpl(message: MessageBase) {
   let url:string = dictBaseUrl + "/word/translate/v1/trans";
   api_post<DictResponse>(url, message.data).then((result)=>{
-    demo();
-    //if(responseSuccess(result)) {
-      debugger
+    if(ResponseHandler.responseSuccess(result)) {
       let sectionTransMesg: MessageBase = {
         type: MessageType.SELECTION_TRANSLATE_RESULT,
         data: result.result.translation
       };
       sendMessageToContent(sectionTransMesg);
-    //}
+    }
+    else{
+      
+    }
   });
 }
 
