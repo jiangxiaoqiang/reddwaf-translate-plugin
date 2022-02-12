@@ -61,7 +61,18 @@
         {
           test : /\.(scss)$/ ,
           use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
-        }
+        },
+        // https://stackoverflow.com/questions/69427025/programmatic-webpack-jest-esm-cant-resolve-module-without-js-file-exten
+        {
+          test: /\.m?js/,
+          type: "javascript/auto",
+        },
+        {
+          test: /\.m?js/,
+          resolve: {
+            fullySpecified: false,
+          },
+        },
       ]
     },
     plugins : [
