@@ -1,13 +1,14 @@
 <template>
   <div id="app">
-    <div>dsfwfwfwfw</div>
     <div id="wrap">
       <ul class="nav nav-tabs">
         <li>
-          <a>设置</a>
-        </li>
-        <li>
-          <a>关于</a>
+          <input 
+          :value="props" 
+          placeholder="username" 
+          v-on:input="updateValue($event.target.value)"/>
+          <input v-model="password" placeholder="password" />
+          <button @click="getUpdateValue">Get</button>
         </li>
       </ul>
     </div>
@@ -15,20 +16,27 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import Translator from "@/public/widget/translator/Translator.vue";
+import { defineComponent, toRefs } from "vue";
+
 export default defineComponent({
-  setup() {
-    const title = process.env.APP_NAME;
-    return {
-      title,
-    };
+  props:{
+   modelValue: String
   },
-  components: {
-    translator: Translator,
+  setup(props,ctx) {
+    function updateValue(value: any) {
+      ctx.emit('update:modelValue', value)
+    }
+
+    const getUpdateValue = () => {
+      const { modelValue } = toRefs(props)
+      debugger
+      alert(modelValue.value);
+    };
+
+    return {
+      getUpdateValue,
+      updateValue,
+    };
   },
 });
 </script>
-
-<style lang="scss" scoped>
-</style>
