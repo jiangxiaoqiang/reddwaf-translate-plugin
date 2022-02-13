@@ -64,5 +64,6 @@
       "/resource/*"
     ],
       "matches": ["<all_urls>"]
-  }]
+  }],
+  "options_page": "/option/options.html"
 }

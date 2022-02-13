@@ -9,8 +9,9 @@
     entry : {
       // https://stackoverflow.com/questions/70891730/is-it-possible-to-let-different-entry-package-to-different-output-path-in-webpac
       'popup/popup' : './src/popup/',
-      'background/background': './src/background',
-      'content/content': './src/content' 
+      'background/background': './src/background/',
+      'content/content': './src/content/',
+      'option/option':'./src/options/' 
     } ,
     resolve: {
       extensions: ['.tsx', '.ts', '.js'],
@@ -93,6 +94,11 @@
       new HtmlWebpackPlugin({
         filename: 'popup/popup.html',
         template: 'src/popup/index.html',
+        inject: false,
+      }),
+      new HtmlWebpackPlugin({
+        filename: 'option/options.html',
+        template: 'src/options/index.html',
         inject: false,
       }),
       new webpack.DefinePlugin({
