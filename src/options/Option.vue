@@ -3,12 +3,17 @@
     <div id="wrap">
       <ul class="nav nav-tabs">
         <li>
-          <input 
-          :value="props" 
-          placeholder="username" 
-          v-on:input="updateValue($event.target.value)"/>
-          <input v-model="password" placeholder="password" />
-          <button @click="getUpdateValue">Get</button>
+          <input
+            :value="props"
+            placeholder="username"
+            v-on:input="updateValue($event.target.value)"
+          />
+          <input
+            :value="props"
+            placeholder="password"
+            v-on:input="updatePasswordValue($event.target.value)"
+          />
+          <button @click="Login">Get</button>
         </li>
       </ul>
     </div>
@@ -16,26 +21,36 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, toRefs } from "vue";
+import { computed, defineComponent } from "vue";
+import { useStore } from "vuex";
+import LocalStorage from "js-wheel/dist/src/utils/data/LocalStorage";
 
 export default defineComponent({
-  props:{
-   modelValue: String
+  props: {
+    modelValue: String,
   },
-  setup(props,ctx) {
+  setup() {
+    const { getters, dispatch } = useStore();
+
     function updateValue(value: any) {
-      ctx.emit('update:modelValue', value)
+      dispatch("Login/setUsername", value);
     }
 
-    const getUpdateValue = () => {
-      const { modelValue } = toRefs(props)
-      debugger
-      alert(modelValue.value);
+    function updatePasswordValue(value: any) {
+      dispatch("Login/setPassword", value);
+    }
+
+    const Login = () => {
+      let username = computed(() => getters["Login/getUsername"]);
+      let password = computed(() => getters["Login/getPassword"]);
+      LocalStorage.setLocalStorage("username", username.value);
+      LocalStorage.setLocalStorage("password", password.value);
     };
 
     return {
-      getUpdateValue,
+      Login,
       updateValue,
+      updatePasswordValue,
     };
   },
 });

@@ -38,7 +38,6 @@ export function addGlossary(message: MessageBase) {
   let url:string = dictBaseUrl + "/word/learn/v1/add";
   debugger
   RequestHandler.post<DictResponse>(url, message.data,appId)?.then((result:any)=>{
-    
     if(ResponseHandler.responseSuccess(result)){
       let sectionTransMesg: MessageBase = {
         type: MessageType.SELECTION_TRANSLATE_RESULT,
