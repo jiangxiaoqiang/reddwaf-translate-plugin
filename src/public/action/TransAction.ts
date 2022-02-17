@@ -3,6 +3,9 @@ import { MessageType } from "@/model/message/MessageType";
 import TranslatorPop from "@/public/widget/translator/TranslatorPop.vue";
 import { createApp } from "vue";
 import store from "@/store";
+// https://stackoverflow.com/questions/36795819/when-should-i-use-curly-braces-for-es6-import
+import { ConfigHandler } from "js-wheel/dist/src/config/ConfigHandler";
+import type { ConfigBase } from "js-wheel/dist/src/model/immutable/ConfigBase";
 
 export function doTranslate(transWord: string, messageType: MessageType) {
   let transMe = MessageType[messageType];
@@ -57,6 +60,10 @@ export function showTranslateResultPanel(translation: string) {
 
 export async function showSelectionTrans(translation: string) {
   if (translation && translation.toString().trim().length > 0) {
+    let configBase:ConfigBase={
+      appId: 7
+    };
+    ConfigHandler.init(configBase);
     showTranslateResultPanel(translation);
   }
 }

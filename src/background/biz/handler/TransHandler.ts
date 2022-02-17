@@ -5,7 +5,7 @@ import { appId, dictBaseUrl } from "@/resource/config/app.config";
 import { MessageType } from "@/model/message/MessageType";
 import { sendMessageToContent } from "@/public/action/MessageInteractive";
 // https://stackoverflow.com/questions/71046998/what-is-the-difference-about-import-import-import-as-in-typescript
-import RequestHandler from "js-wheel/dist/src/net/rest/RequestHandler";
+import {RequestHandler} from "js-wheel/dist/src/net/rest/RequestHandler";
 import { ResponseHandler } from "js-wheel/dist/index";
 
 export function handleTransImpl(message: MessageBase) {
