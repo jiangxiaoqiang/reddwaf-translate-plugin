@@ -61,7 +61,9 @@ export function showTranslateResultPanel(translation: string) {
 export async function showSelectionTrans(translation: string) {
   if (translation && translation.toString().trim().length > 0) {
     let configBase:ConfigBase={
-      appId: 7
+      appId: 7,
+      baseAuthUrl: 'https://dict.poemhub.top',
+      userLoginUrl: "/dict/user/plugin/login"
     };
     ConfigHandler.init(configBase);
     showTranslateResultPanel(translation);

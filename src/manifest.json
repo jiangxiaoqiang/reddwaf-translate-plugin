@@ -14,11 +14,11 @@
   "author" : "Jiangxiaoqiang <jiangtingqiang@gmail.com>" ,
   "permissions" : [
     "contextMenus" ,
-    "storage" ,
+    "storage",
     "clipboardWrite" ,
     "clipboardRead" ,
     "webRequest"
-  ] ,
+  ],
   "host_permissions": [
     "https://dict.poemhub.top/*"
   ],
