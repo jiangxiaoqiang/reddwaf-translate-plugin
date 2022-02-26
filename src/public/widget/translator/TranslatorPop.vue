@@ -5,7 +5,7 @@
         <span class="reddwarf-btn-icon"></span>
       </button>
     </div>
-    <div id="pop-container">
+    <div id="popper-container">
       <div id="translate-panel">
         <div class="header">
           <div class="left"></div>
@@ -99,6 +99,16 @@ export default defineComponent({
   z-index: 9999999999;
   left: 0;
   top: 0;
+}
+
+#popper-container {
+  z-index: 9999999999;
+  touch-action: none;
+  transition-property: opacity;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+  background-color: #f5f8fa;
 }
 
 #translate-btn .reddwarf-btn-icon{

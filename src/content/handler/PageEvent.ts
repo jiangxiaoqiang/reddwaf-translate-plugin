@@ -5,11 +5,23 @@ import {
   showTranslateButton 
 } from "@/public/action/TransAction";
 import { TransGlobal } from "@/model/immutable/TransGlobal";
+// https://stackoverflow.com/questions/36795819/when-should-i-use-curly-braces-for-es6-import
+import { ConfigHandler } from "js-wheel/dist/src/config/ConfigHandler";
+import type { ConfigBase } from "js-wheel/dist/src/model/immutable/ConfigBase";
 
 const selection = getSelection();
 
 export async function firstMouseUp(e: MouseEvent) {
   if (selection && selection.toString().trim().length > 0) {
+    let configBase:ConfigBase={
+      appId: 7,
+      baseAuthUrl: "https://dict.poemhub.top",
+      userLoginUrlPath: "/dict/user/plugin/login",
+      accessTokenUrlPath: "/dict/auth/refresh_token/refresh",
+      refreshTokenUrlPath: "/dict/auth/access_token/refresh",
+    };
+    console.log(configBase);
+    await ConfigHandler.stupidInit(configBase);
     removeFirstMouseUp();
     saveTransWord(selection.toString().trim(), e);
   }
