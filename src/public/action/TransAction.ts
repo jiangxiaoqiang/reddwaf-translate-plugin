@@ -20,10 +20,10 @@ export function doTranslate(transWord: string, messageType: MessageType) {
 }
 
 export function doAddGlossary(transWord: string, messageType: MessageType) {
-  let transMe = MessageType[messageType];
+  let addGlossary = MessageType[messageType];
   if (transWord && transWord.length > 0) {
     let message: MessageBase = {
-      type: transMe,
+      type: addGlossary,
       data: {
         word: transWord,
         from: "en",
@@ -52,8 +52,14 @@ export function showTranslateResultPanel(translation: string) {
     translateBtn.style.visibility = "visible";
     translateBtn.style.zIndex = "999999999";
     translateBtn.style.position = "absolute";
-    //translateBtn.style.backgroundColor = "white";
     setTransResult(translation);
+  }
+}
+
+export function doChangeCollectorStatus() {
+  let translateBtn = document.getElementById("collector-star");
+  if (translateBtn) {
+    translateBtn.style.backgroundColor = "red";
   }
 }
 
@@ -61,6 +67,10 @@ export async function showSelectionTrans(translation: string) {
   if (translation && translation.toString().trim().length > 0) {
     showTranslateResultPanel(translation);
   }
+}
+
+export async function changeCollectorStatus() {
+  doChangeCollectorStatus();
 }
 
 export function setTransResult(translateResult: string) {
@@ -99,7 +109,6 @@ export async function addTransShowElement(translation: string) {
     if(translateBtn){
       translateBtn.style.visibility = "hidden";
     }
-
   }
 }
 
@@ -127,6 +136,7 @@ export function showTranslateButton(e: MouseEvent) {
 }
 
 export function closePopupWindow() {
+  debugger
   let translateBtn = document.getElementById("reddwarf-translate-app");
   if (translateBtn) {
     translateBtn.remove();

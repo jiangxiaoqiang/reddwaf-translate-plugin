@@ -108,8 +108,8 @@
                   <span
                     icon="star-empty"
                     aria-hidden="true"
-                    class="bp3-icon bp3-icon-star-empty"
                     ><svg
+                      id = "collector-star"
                       data-icon="star-empty"
                       width="14"
                       height="14"
@@ -119,7 +119,8 @@
                         d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
                         fill-rule="evenodd"
                       ></path></svg
-                  ></span></button
+                  ></span>
+                  </button
                 ><button
                   type="button"
                   class="bp3-button bp3-minimal bp3-small settings"
@@ -358,7 +359,6 @@ export default defineComponent({
     };
 
     const addGlossary = (e: MouseEvent) => {
-      alert("Please");
       const transWord = computed(() => getters["Trans/getTransWord"]);
       if (transWord && transWord.value && transWord.value.trim().length > 0) {
         doAddGlossary(transWord.value.trim(), MessageType.ADD_GLOSSARY);

@@ -39,7 +39,7 @@ export function addGlossary(message: MessageBase) {
   RequestHandler.post<DictResponse>(url, message.data,appId)?.then((result:any)=>{
     if(ResponseHandler.responseSuccess(result)){
       let sectionTransMesg: MessageBase = {
-        type: MessageType.SELECTION_TRANSLATE_RESULT,
+        type: MessageType.ADD_GLOSSARY_SUCCESS,
         data: result.result.translation
       };
       sendMessageToContent(sectionTransMesg);

@@ -40,7 +40,7 @@ function processDocumentClick(clickEvent: MouseEvent) {
   }
 
   function isPopupClicked(clickTarget: HTMLElement): boolean {
-    const popupContainer = document.querySelector('#pop-container') as HTMLDivElement;
+    const popupContainer = document.querySelector('#popper-container1') as HTMLDivElement;
     return isAncestorOf(popupContainer, clickTarget);
   }
 
