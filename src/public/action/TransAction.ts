@@ -51,7 +51,6 @@ export function showTranslateResultPanel(translation: string) {
     translateBtn.style.visibility = "visible";
     translateBtn.style.zIndex = "99999";
     translateBtn.style.backgroundColor = "white";
-    debugger
     setTransResult(translation);
   }
 }
