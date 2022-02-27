@@ -51,6 +51,7 @@ export function showTranslateResultPanel(translation: string) {
     translateBtn.style.visibility = "visible";
     translateBtn.style.zIndex = "99999";
     translateBtn.style.backgroundColor = "white";
+    debugger
     setTransResult(translation);
   }
 }
@@ -93,6 +94,11 @@ export async function addTransShowElement(translation: string) {
     app.use(store);
     let vm = app.mount("#uniq-anchor-point");
     document.body.appendChild(vm.$el);
+    let translateBtn = document.getElementById("popper-container");
+    if(translateBtn){
+      translateBtn.style.visibility = "hidden";
+    }
+
   }
 }
 
