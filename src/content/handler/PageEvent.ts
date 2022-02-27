@@ -34,7 +34,7 @@ export async function mouseClick(e: MouseEvent) {
 function processDocumentClick(clickEvent: MouseEvent) {
   let clickTarget: HTMLElement | null = clickEvent.target as HTMLElement;
   let isClicked = isPopupClicked(clickTarget);
-  let translateBtn = document.getElementById("translate-panel");
+  let translateBtn = document.getElementById("popper-container1");
   if(!isClicked&&translateBtn?.style.visibility == "visible") {
     closePopupWindow();
   }

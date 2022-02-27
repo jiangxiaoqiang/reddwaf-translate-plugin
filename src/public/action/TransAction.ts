@@ -35,10 +35,11 @@ export function doAddGlossary(transWord: string, messageType: MessageType) {
 }
 
 export function setTranslateResultPosition(e: MouseEvent) {
-  let translateBtn = document.getElementById("translate-panel");
+  let translateBtn = document.getElementById("popper-container1");
   if (translateBtn) {
     translateBtn.style.visibility = "hidden";
     translateBtn.style.width = "140px";
+    translateBtn.style.zIndex = "999999999";
     translateBtn.style.backgroundColor = "transparent";
     translateBtn.style.height = "150px";
     translateBtn.style.transform = "translate(" + e.pageX + "px," + e.pageY + "px)";
@@ -46,11 +47,12 @@ export function setTranslateResultPosition(e: MouseEvent) {
 }
 
 export function showTranslateResultPanel(translation: string) {
-  let translateBtn = document.getElementById("translate-panel");
+  let translateBtn = document.getElementById("popper-container1");
   if (translateBtn) {
     translateBtn.style.visibility = "visible";
-    translateBtn.style.zIndex = "99999";
-    translateBtn.style.backgroundColor = "white";
+    translateBtn.style.zIndex = "999999999";
+    translateBtn.style.position = "absolute";
+    //translateBtn.style.backgroundColor = "white";
     setTransResult(translation);
   }
 }
@@ -93,7 +95,7 @@ export async function addTransShowElement(translation: string) {
     app.use(store);
     let vm = app.mount("#uniq-anchor-point");
     document.body.appendChild(vm.$el);
-    let translateBtn = document.getElementById("popper-container");
+    let translateBtn = document.getElementById("popper-container1");
     if(translateBtn){
       translateBtn.style.visibility = "hidden";
     }

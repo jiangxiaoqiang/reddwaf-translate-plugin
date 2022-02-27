@@ -9,20 +9,12 @@
         ></button>
       </div>
       <div
-        id="popper-container"
+        id="popper-container1"
         class="bp3-elevation-4"
-        style="
-          width: 250px;
-          transform: translate3d(0px, 425px, 0px);
-          position: absolute;
-          left: 0px;
-          top: 0px;
-        "
       >
         <div
           id="translate-panel"
           class="size-small"
-          style="max-height: 490.594px"
         >
           <div class="fixed">
             <div class="header">
@@ -111,6 +103,7 @@
                   type="button"
                   title="添加到收藏夹"
                   class="bp3-button bp3-minimal bp3-small"
+                  @click="addGlossary"
                 >
                   <span
                     icon="star-empty"
@@ -171,7 +164,7 @@
               </div>
             </div>
             <div class="bp3-collapse">
-              <div id="reddwarf-translate-result">ddd的的点点滴滴</div>
+              <div id="reddwarf-translate-result"></div>
               <div class="bp3-collapse-body" aria-hidden="true">
                 <div class="bp3-card bp3-elevation-0 quick-settings">
                   <div>
@@ -320,505 +313,7 @@
             </div>
           </div>
           <div class="body" style="">
-            <div class="bp3-card bp3-elevation-0 result-block">
-              <div class="legend">
-                <div class="legend-left">
-                  <span
-                    class="api-ico"
-                    style="
-                      background-image: url('chrome-extension://ikhdkkncnoglghljlkmcimlnlhkeamad/google.ico');
-                    "
-                  ></span>
-                  <h6 class="bp3-heading">谷歌翻译</h6>
-                  <span class="bp3-popover-wrapper lang-select"
-                    ><span aria-haspopup="true" class="bp3-popover-target">
-                      <div class="">
-                        <span class="source"
-                          ><span class="source-text">英语</span
-                          ><span
-                            icon="caret-down"
-                            aria-hidden="true"
-                            class="bp3-icon bp3-icon-caret-down"
-                            ><svg
-                              data-icon="caret-down"
-                              width="12"
-                              height="12"
-                              viewBox="0 0 16 16"
-                            >
-                              <path
-                                d="M12 6.5c0-.28-.22-.5-.5-.5h-7a.495.495 0 00-.37.83l3.5 4c.09.1.22.17.37.17s.28-.07.37-.17l3.5-4c.08-.09.13-.2.13-.33z"
-                                fill-rule="evenodd"
-                              ></path></svg></span
-                        ></span>
-                      </div> </span></span
-                  ><button
-                    type="button"
-                    title="朗读"
-                    class="bp3-button bp3-minimal bp3-small"
-                  >
-                    <span
-                      icon="volume-up"
-                      aria-hidden="true"
-                      class="bp3-icon bp3-icon-volume-up"
-                      ><svg
-                        data-icon="volume-up"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M7 1.86c-.28 0-.53.11-.71.29l-2.7 2.71H1c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h2.59l2.71 2.71a1.003 1.003 0 001.71-.71v-10c-.01-.55-.46-1-1.01-1zm6.74-.99l-1.58 1.22A9.985 9.985 0 0114 7.86c0 2.16-.69 4.15-1.85 5.78l1.58 1.22c1.42-1.97 2.26-4.38 2.26-7 .01-2.61-.84-5.02-2.25-6.99zM8.98 4.52C9.62 5.48 10 6.63 10 7.86s-.38 2.39-1.02 3.34l1.59 1.22c.9-1.29 1.43-2.86 1.43-4.56 0-1.7-.53-3.27-1.43-4.56L8.98 4.52z"
-                          fill-rule="evenodd"
-                        ></path></svg
-                    ></span>
-                  </button>
-                </div>
-                <div style="flex-shrink: 0">
-                  <button
-                    type="button"
-                    title="收起"
-                    class="bp3-button bp3-minimal bp3-small"
-                  >
-                    <span
-                      icon="chevron-up"
-                      aria-hidden="true"
-                      class="bp3-icon bp3-icon-chevron-up"
-                      ><svg
-                        data-icon="chevron-up"
-                        width="14"
-                        height="14"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M12.71 9.29l-4-4C8.53 5.11 8.28 5 8 5s-.53.11-.71.29l-4 4a1.003 1.003 0 001.42 1.42L8 7.41l3.29 3.29c.18.19.43.3.71.3a1.003 1.003 0 00.71-1.71z"
-                          fill-rule="evenodd"
-                        ></path></svg
-                    ></span></button
-                  ><button
-                    type="button"
-                    title="复制翻译结果"
-                    class="bp3-button bp3-minimal bp3-small"
-                  >
-                    <span
-                      icon="duplicate"
-                      aria-hidden="true"
-                      class="bp3-icon bp3-icon-duplicate"
-                      ><svg
-                        data-icon="duplicate"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M15 0H5c-.55 0-1 .45-1 1v2h2V2h8v7h-1v2h2c.55 0 1-.45 1-1V1c0-.55-.45-1-1-1zm-4 4H1c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h10c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zm-1 10H2V6h8v8z"
-                          fill-rule="evenodd"
-                        ></path></svg
-                    ></span></button
-                  ><a
-                    role="button"
-                    target="_blank"
-                    title="查看详细结果"
-                    class="bp3-button bp3-minimal bp3-small"
-                    tabindex="0"
-                    href="https://translate.google.cn/?sl=en&amp;tl=zh-CN&amp;text=forward&amp;op=translate"
-                    ><span
-                      icon="share"
-                      aria-hidden="true"
-                      class="bp3-icon bp3-icon-share"
-                      ><svg
-                        data-icon="share"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M10.99 13.99h-9v-9h4.76l2-2H.99c-.55 0-1 .45-1 1v11c0 .55.45 1 1 1h11c.55 0 1-.45 1-1V7.24l-2 2v4.75zm4-14h-5c-.55 0-1 .45-1 1s.45 1 1 1h2.59L7.29 7.28a1 1 0 00-.3.71 1.003 1.003 0 001.71.71l5.29-5.29V6c0 .55.45 1 1 1s1-.45 1-1V1c0-.56-.45-1.01-1-1.01z"
-                          fill-rule="evenodd"
-                        ></path></svg></span
-                  ></a>
-                </div>
-              </div>
-              <div
-                class="bp3-collapse"
-                style="
-                  height: auto;
-                  overflow-y: visible;
-                  transition: none 0s ease 0s;
-                "
-              >
-                <div
-                  class="bp3-collapse-body"
-                  aria-hidden="false"
-                  style="
-                    transform: translateY(0px);
-                    transition: none 0s ease 0s;
-                  "
-                >
-                  <div style="display: none">
-                    <p class="">1</p>
-                    <p class="" style="width: 150px">1</p>
-                  </div>
-                  <div class="phonetic">
-                    <div class="phonetic-item" style="max-width: 100%">
-                      <span style="position: relative">/ˈfôrwərd/</span
-                      ><button
-                        type="button"
-                        title="朗读"
-                        class="bp3-button bp3-minimal bp3-small"
-                        style="flex-shrink: 0"
-                      >
-                        <span
-                          icon="volume-up"
-                          aria-hidden="true"
-                          class="bp3-icon bp3-icon-volume-up"
-                          ><svg
-                            data-icon="volume-up"
-                            width="12"
-                            height="12"
-                            viewBox="0 0 16 16"
-                          >
-                            <path
-                              d="M7 1.86c-.28 0-.53.11-.71.29l-2.7 2.71H1c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h2.59l2.71 2.71a1.003 1.003 0 001.71-.71v-10c-.01-.55-.46-1-1.01-1zm6.74-.99l-1.58 1.22A9.985 9.985 0 0114 7.86c0 2.16-.69 4.15-1.85 5.78l1.58 1.22c1.42-1.97 2.26-4.38 2.26-7 .01-2.61-.84-5.02-2.25-6.99zM8.98 4.52C9.62 5.48 10 6.63 10 7.86s-.38 2.39-1.02 3.34l1.59 1.22c.9-1.29 1.43-2.86 1.43-4.56 0-1.7-.53-3.27-1.43-4.56L8.98 4.52z"
-                              fill-rule="evenodd"
-                            ></path></svg
-                        ></span>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="common-result">
-                    <div class="dict">
-                      
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="bp3-card bp3-elevation-0 result-block">
-              <div class="legend">
-                <div class="legend-left">
-                  <span
-                    class="api-ico"
-                    style="
-                      background-image: url('chrome-extension://ikhdkkncnoglghljlkmcimlnlhkeamad/deepl.png');
-                    "
-                  ></span>
-                  <h6 class="bp3-heading">DeepL</h6>
-                  <span class="bp3-popover-wrapper lang-select"
-                    ><span aria-haspopup="true" class="bp3-popover-target">
-                      <div class="">
-                        <span class="source"
-                          ><span class="source-text">英语</span
-                          ><span
-                            icon="caret-down"
-                            aria-hidden="true"
-                            class="bp3-icon bp3-icon-caret-down"
-                            ><svg
-                              data-icon="caret-down"
-                              width="12"
-                              height="12"
-                              viewBox="0 0 16 16"
-                            >
-                              <path
-                                d="M12 6.5c0-.28-.22-.5-.5-.5h-7a.495.495 0 00-.37.83l3.5 4c.09.1.22.17.37.17s.28-.07.37-.17l3.5-4c.08-.09.13-.2.13-.33z"
-                                fill-rule="evenodd"
-                              ></path></svg></span
-                        ></span>
-                      </div> </span></span
-                  ><button
-                    type="button"
-                    title="朗读"
-                    class="bp3-button bp3-minimal bp3-small"
-                  >
-                    <span
-                      icon="volume-up"
-                      aria-hidden="true"
-                      class="bp3-icon bp3-icon-volume-up"
-                      ><svg
-                        data-icon="volume-up"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M7 1.86c-.28 0-.53.11-.71.29l-2.7 2.71H1c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h2.59l2.71 2.71a1.003 1.003 0 001.71-.71v-10c-.01-.55-.46-1-1.01-1zm6.74-.99l-1.58 1.22A9.985 9.985 0 0114 7.86c0 2.16-.69 4.15-1.85 5.78l1.58 1.22c1.42-1.97 2.26-4.38 2.26-7 .01-2.61-.84-5.02-2.25-6.99zM8.98 4.52C9.62 5.48 10 6.63 10 7.86s-.38 2.39-1.02 3.34l1.59 1.22c.9-1.29 1.43-2.86 1.43-4.56 0-1.7-.53-3.27-1.43-4.56L8.98 4.52z"
-                          fill-rule="evenodd"
-                        ></path></svg
-                    ></span>
-                  </button>
-                </div>
-                <div style="flex-shrink: 0">
-                  <button
-                    type="button"
-                    title="收起"
-                    class="bp3-button bp3-minimal bp3-small"
-                  >
-                    <span
-                      icon="chevron-up"
-                      aria-hidden="true"
-                      class="bp3-icon bp3-icon-chevron-up"
-                      ><svg
-                        data-icon="chevron-up"
-                        width="14"
-                        height="14"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M12.71 9.29l-4-4C8.53 5.11 8.28 5 8 5s-.53.11-.71.29l-4 4a1.003 1.003 0 001.42 1.42L8 7.41l3.29 3.29c.18.19.43.3.71.3a1.003 1.003 0 00.71-1.71z"
-                          fill-rule="evenodd"
-                        ></path></svg
-                    ></span></button
-                  ><button
-                    type="button"
-                    title="复制翻译结果"
-                    class="bp3-button bp3-minimal bp3-small"
-                  >
-                    <span
-                      icon="duplicate"
-                      aria-hidden="true"
-                      class="bp3-icon bp3-icon-duplicate"
-                      ><svg
-                        data-icon="duplicate"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M15 0H5c-.55 0-1 .45-1 1v2h2V2h8v7h-1v2h2c.55 0 1-.45 1-1V1c0-.55-.45-1-1-1zm-4 4H1c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h10c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zm-1 10H2V6h8v8z"
-                          fill-rule="evenodd"
-                        ></path></svg
-                    ></span></button
-                  ><a
-                    role="button"
-                    target="_blank"
-                    title="查看详细结果"
-                    class="bp3-button bp3-minimal bp3-small"
-                    tabindex="0"
-                    href="https://www.deepl.com/translator#en/zh/forward"
-                    ><span
-                      icon="share"
-                      aria-hidden="true"
-                      class="bp3-icon bp3-icon-share"
-                      ><svg
-                        data-icon="share"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M10.99 13.99h-9v-9h4.76l2-2H.99c-.55 0-1 .45-1 1v11c0 .55.45 1 1 1h11c.55 0 1-.45 1-1V7.24l-2 2v4.75zm4-14h-5c-.55 0-1 .45-1 1s.45 1 1 1h2.59L7.29 7.28a1 1 0 00-.3.71 1.003 1.003 0 001.71.71l5.29-5.29V6c0 .55.45 1 1 1s1-.45 1-1V1c0-.56-.45-1.01-1-1.01z"
-                          fill-rule="evenodd"
-                        ></path></svg></span
-                  ></a>
-                </div>
-              </div>
-              <div
-                class="bp3-collapse"
-                style="
-                  height: auto;
-                  overflow-y: visible;
-                  transition: none 0s ease 0s;
-                "
-              >
-                <div
-                  class="bp3-collapse-body"
-                  aria-hidden="false"
-                  style="
-                    transform: translateY(0px);
-                    transition: none 0s ease 0s;
-                  "
-                >
-                  <div style="display: none">
-                    <p class="">1</p>
-                    <p class="" style="width: 150px">1</p>
-                  </div>
-                  <div class="common-result">
-                    <div class="general-result">
-                      <p>
-                        谈到这个<button
-                          type="button"
-                          title="朗读"
-                          class="bp3-button bp3-minimal bp3-small"
-                        >
-                          <span
-                            icon="volume-up"
-                            aria-hidden="true"
-                            class="bp3-icon bp3-icon-volume-up"
-                            ><svg
-                              data-icon="volume-up"
-                              width="12"
-                              height="12"
-                              viewBox="0 0 16 16"
-                            >
-                              <path
-                                d="M7 1.86c-.28 0-.53.11-.71.29l-2.7 2.71H1c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h2.59l2.71 2.71a1.003 1.003 0 001.71-.71v-10c-.01-.55-.46-1-1.01-1zm6.74-.99l-1.58 1.22A9.985 9.985 0 0114 7.86c0 2.16-.69 4.15-1.85 5.78l1.58 1.22c1.42-1.97 2.26-4.38 2.26-7 .01-2.61-.84-5.02-2.25-6.99zM8.98 4.52C9.62 5.48 10 6.63 10 7.86s-.38 2.39-1.02 3.34l1.59 1.22c.9-1.29 1.43-2.86 1.43-4.56 0-1.7-.53-3.27-1.43-4.56L8.98 4.52z"
-                                fill-rule="evenodd"
-                              ></path></svg
-                          ></span>
-                        </button>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="bp3-card bp3-elevation-0 result-block">
-              <div class="legend">
-                <div class="legend-left">
-                  <span
-                    class="api-ico"
-                    style="
-                      background-image: url('chrome-extension://ikhdkkncnoglghljlkmcimlnlhkeamad/bing.ico');
-                    "
-                  ></span>
-                  <h6 class="bp3-heading">必应词典</h6>
-                  <span class="bp3-popover-wrapper lang-select"
-                    ><span aria-haspopup="true" class="bp3-popover-target">
-                      <div class="">
-                        <span class="source"
-                          ><span class="source-text"></span
-                          ><span
-                            icon="caret-down"
-                            aria-hidden="true"
-                            class="bp3-icon bp3-icon-caret-down"
-                            ><svg
-                              data-icon="caret-down"
-                              width="12"
-                              height="12"
-                              viewBox="0 0 16 16"
-                            >
-                              <path
-                                d="M12 6.5c0-.28-.22-.5-.5-.5h-7a.495.495 0 00-.37.83l3.5 4c.09.1.22.17.37.17s.28-.07.37-.17l3.5-4c.08-.09.13-.2.13-.33z"
-                                fill-rule="evenodd"
-                              ></path></svg></span
-                        ></span>
-                      </div> </span></span
-                  ><button
-                    type="button"
-                    title="朗读"
-                    class="bp3-button bp3-minimal bp3-small"
-                  >
-                    <span
-                      icon="volume-up"
-                      aria-hidden="true"
-                      class="bp3-icon bp3-icon-volume-up"
-                      ><svg
-                        data-icon="volume-up"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M7 1.86c-.28 0-.53.11-.71.29l-2.7 2.71H1c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h2.59l2.71 2.71a1.003 1.003 0 001.71-.71v-10c-.01-.55-.46-1-1.01-1zm6.74-.99l-1.58 1.22A9.985 9.985 0 0114 7.86c0 2.16-.69 4.15-1.85 5.78l1.58 1.22c1.42-1.97 2.26-4.38 2.26-7 .01-2.61-.84-5.02-2.25-6.99zM8.98 4.52C9.62 5.48 10 6.63 10 7.86s-.38 2.39-1.02 3.34l1.59 1.22c.9-1.29 1.43-2.86 1.43-4.56 0-1.7-.53-3.27-1.43-4.56L8.98 4.52z"
-                          fill-rule="evenodd"
-                        ></path></svg
-                    ></span>
-                  </button>
-                </div>
-                <div style="flex-shrink: 0">
-                  <button
-                    type="button"
-                    title="收起"
-                    class="bp3-button bp3-minimal bp3-small"
-                  >
-                    <span
-                      icon="chevron-up"
-                      aria-hidden="true"
-                      class="bp3-icon bp3-icon-chevron-up"
-                      ><svg
-                        data-icon="chevron-up"
-                        width="14"
-                        height="14"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M12.71 9.29l-4-4C8.53 5.11 8.28 5 8 5s-.53.11-.71.29l-4 4a1.003 1.003 0 001.42 1.42L8 7.41l3.29 3.29c.18.19.43.3.71.3a1.003 1.003 0 00.71-1.71z"
-                          fill-rule="evenodd"
-                        ></path></svg
-                    ></span></button
-                  ><button
-                    type="button"
-                    disabled=""
-                    title="复制翻译结果"
-                    class="bp3-button bp3-disabled bp3-minimal bp3-small"
-                    tabindex="-1"
-                  >
-                    <span
-                      icon="duplicate"
-                      aria-hidden="true"
-                      class="bp3-icon bp3-icon-duplicate"
-                      ><svg
-                        data-icon="duplicate"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M15 0H5c-.55 0-1 .45-1 1v2h2V2h8v7h-1v2h2c.55 0 1-.45 1-1V1c0-.55-.45-1-1-1zm-4 4H1c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h10c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zm-1 10H2V6h8v8z"
-                          fill-rule="evenodd"
-                        ></path></svg
-                    ></span></button
-                  ><a
-                    role="button"
-                    target="_blank"
-                    title="查看详细结果"
-                    class="bp3-button bp3-minimal bp3-small"
-                    tabindex="0"
-                    href="https://cn.bing.com/dict/search?q=forward"
-                    ><span
-                      icon="share"
-                      aria-hidden="true"
-                      class="bp3-icon bp3-icon-share"
-                      ><svg
-                        data-icon="share"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M10.99 13.99h-9v-9h4.76l2-2H.99c-.55 0-1 .45-1 1v11c0 .55.45 1 1 1h11c.55 0 1-.45 1-1V7.24l-2 2v4.75zm4-14h-5c-.55 0-1 .45-1 1s.45 1 1 1h2.59L7.29 7.28a1 1 0 00-.3.71 1.003 1.003 0 001.71.71l5.29-5.29V6c0 .55.45 1 1 1s1-.45 1-1V1c0-.56-.45-1.01-1-1.01z"
-                          fill-rule="evenodd"
-                        ></path></svg></span
-                  ></a>
-                </div>
-              </div>
-              <div
-                class="bp3-collapse"
-                style="
-                  height: auto;
-                  overflow-y: visible;
-                  transition: none 0s ease 0s;
-                "
-              >
-                <div
-                  class="bp3-collapse-body"
-                  aria-hidden="false"
-                  style="
-                    transform: translateY(0px);
-                    transition: none 0s ease 0s;
-                  "
-                >
-                  <div style="display: none">
-                    <p class="">1</p>
-                    <p class="" style="width: 150px">1</p>
-                  </div>
-                  <div class="error">
-                    <div class="bp3-non-ideal-state">
-                      <span
-                        >无翻译结果。如果你使用了代理软件，请关闭代理或<a
-                          rel="noreferrer"
-                          target="_blank"
-                          href="https://hcfy.app/docs/faq/#proxy"
-                          >将必应词典加入直连名单</a
-                        >后重试。</span
-                      ><button type="button" class="bp3-button bp3-small">
-                        <span class="bp3-button-text">重试</span>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="common-result"></div>
-                </div>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -863,6 +358,7 @@ export default defineComponent({
     };
 
     const addGlossary = (e: MouseEvent) => {
+      alert("Please");
       const transWord = computed(() => getters["Trans/getTransWord"]);
       if (transWord && transWord.value && transWord.value.trim().length > 0) {
         doAddGlossary(transWord.value.trim(), MessageType.ADD_GLOSSARY);
@@ -879,6 +375,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+
+#reddwarf-translate-app {
+  z-index: 99999999999;
+}
+
 #translate-panel {
   background-color: #f5f8fa;
   display: flex;
@@ -969,6 +470,7 @@ export default defineComponent({
   align-items: center;
   padding: 4px 6px 4px 10px;
   border-bottom: 1px solid #d1d1d1;
+  
 }
 
 .bp3-dark #translate-panel .header {
@@ -1167,13 +669,12 @@ export default defineComponent({
   margin: 0 5px 5px 0;
 }
 
-#popper-container {
+#popper-container1 {
   width: 250px;
   max-width: 100%;
   position: absolute;
   left: 0;
   top: 0;
-  z-index: 9999999998;
   touch-action: none;
   transition: opacity 0.2s;
   background-color: #f5f8fa;
@@ -1270,7 +771,7 @@ export default defineComponent({
 
 #translate-btn {
   position: absolute;
-  z-index: 9999999999;
+  z-index: 999;
   left: 0;
   top: 0;
   width: 28px;
@@ -1312,7 +813,7 @@ export default defineComponent({
 
 #ocr-container {
   position: fixed;
-  z-index: 99999999999999;
+  z-index: 99;
   left: 0;
   top: 0;
   right: 0;
@@ -1353,7 +854,7 @@ export default defineComponent({
 
 .app-toaster-container {
   position: fixed !important;
-  z-index: 9999999999 !important;
+  z-index: 99999 !important;
 }
 
 .app-toaster-container .bp3-toast {
