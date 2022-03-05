@@ -19,6 +19,7 @@ export async function firstMouseUp(e: MouseEvent) {
       userLoginUrlPath: "/dict/user/plugin/login",
       accessTokenUrlPath: "/dict/auth/refresh_token/refresh",
       refreshTokenUrlPath: "/dict/auth/access_token/refresh",
+      productId: 5
     };
     console.log(configBase);
     await ConfigHandler.stupidInit(configBase);
