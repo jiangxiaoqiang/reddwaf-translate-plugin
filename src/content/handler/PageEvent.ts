@@ -21,7 +21,6 @@ export async function firstMouseUp(e: MouseEvent) {
       refreshTokenUrlPath: "/dict/auth/access_token/refresh",
       productId: 5
     };
-    console.log(configBase);
     await ConfigHandler.stupidInit(configBase);
     removeFirstMouseUp();
     saveTransWord(selection.toString().trim(), e);
@@ -71,10 +70,11 @@ function saveTransWord(transWord: string, e: MouseEvent) {
   }, function () {
     addTransShowElement(transWord.toLowerCase());
     showTranslateButton(e);
+    addFirstMouseUp();
     delay(2000, null).then(() => {
       hideTransButton();
     }).then(() => {
-      addFirstMouseUp();
+      
     })
   });
 }

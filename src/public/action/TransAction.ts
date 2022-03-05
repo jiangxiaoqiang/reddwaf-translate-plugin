@@ -131,7 +131,11 @@ export function showTranslateButton(e: MouseEvent) {
     translateBtn.style.width = "40px";
     translateBtn.style.backgroundColor = "transparent";
     translateBtn.style.height = "50px";
-    translateBtn.style.transform = "translate(" + e.pageX + "px," + e.pageY + "px)";
+    /**
+     * 注意显示翻译按钮时，要将图标与选中单词隔开一定距离
+     * 避免二次触发点击事件
+     */
+    translateBtn.style.transform = "translate(" + (e.pageX+15) + "px," + (e.pageY+15) + "px)";
   }
 }
 
