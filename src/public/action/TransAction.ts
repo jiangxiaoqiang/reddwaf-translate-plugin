@@ -136,7 +136,6 @@ export function showTranslateButton(e: MouseEvent) {
 }
 
 export function closePopupWindow() {
-  debugger
   let translateBtn = document.getElementById("reddwarf-translate-app");
   if (translateBtn) {
     translateBtn.remove();
