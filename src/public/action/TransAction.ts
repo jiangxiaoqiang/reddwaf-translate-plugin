@@ -3,6 +3,7 @@ import { MessageType } from "@/model/message/MessageType";
 import TranslatorPop from "@/public/widget/translator/TranslatorPop.vue";
 import { createApp } from "vue";
 import store from "@/store";
+import LocalStorage from "js-wheel/dist/src/utils/data/LocalStorage";
 
 export function doTranslate(transWord: string, messageType: MessageType) {
   let transMe = MessageType[messageType];
@@ -46,12 +47,15 @@ export function setTranslateResultPosition(e: MouseEvent) {
   }
 }
 
-export function showTranslateResultPanel(translation: string) {
+export async function showTranslateResultPanel(translation: string) {
   let translateBtn = document.getElementById("popper-container1");
   if (translateBtn) {
     translateBtn.style.visibility = "visible";
     translateBtn.style.zIndex = "999999999";
     translateBtn.style.position = "absolute";
+    let xAxios = await LocalStorage.readLocalStorage("pop-window-x-axios");
+    let yAxios = await LocalStorage.readLocalStorage("pop-window-y-axios");
+    translateBtn.style.transform = "translate(" + (xAxios) + "px," + (yAxios) + "px)";
     setTransResult(translation);
   }
 }
@@ -121,7 +125,7 @@ export function hideTransButton() {
   }
 }
 
-export function showTranslateButton(e: MouseEvent) {
+export async function showTranslateButton(e: MouseEvent) {
   let translateBtn = document.getElementById("translate-btn");
   if (translateBtn) {
     if (translateBtn.style.visibility == "visible") {
@@ -136,6 +140,8 @@ export function showTranslateButton(e: MouseEvent) {
      * 避免二次触发点击事件
      */
     translateBtn.style.transform = "translate(" + (e.pageX+15) + "px," + (e.pageY+15) + "px)";
+    await LocalStorage.setLocalStorage("pop-window-x-axios",(e.pageX+15).toString());
+    await LocalStorage.setLocalStorage("pop-window-y-axios",(e.pageY+15).toString());
   }
 }
 
