@@ -678,6 +678,7 @@ export default defineComponent({
   touch-action: none;
   transition: opacity 0.2s;
   background-color: #f5f8fa;
+  visibility: hidden;
 }
 
 .bp3-dark #popper-container {

@@ -87,10 +87,6 @@ export function setTransResult(translateResult: string) {
 export async function addTransShowElement(translation: string) {
   let anchorElementId = "uniq-anchor-point";
   let anchorElement = document.getElementById(anchorElementId);
-  if (anchorElement) {
-    document.getElementById("uniq-anchor-point")?.remove();
-    anchorElement = null;
-  }
   if (anchorElement == null || anchorElement === undefined) {
     let reddwarfTranslateDiv = document.createElement("div");
     reddwarfTranslateDiv.id = anchorElementId;
@@ -109,10 +105,6 @@ export async function addTransShowElement(translation: string) {
     app.use(store);
     let vm = app.mount("#uniq-anchor-point");
     document.body.appendChild(vm.$el);
-    let translateBtn = document.getElementById("popper-container1");
-    if(translateBtn){
-      translateBtn.style.visibility = "hidden";
-    }
   }
 }
 
@@ -146,6 +138,7 @@ export async function showTranslateButton(e: MouseEvent) {
 }
 
 export function closePopupWindow() {
+  debugger;
   let translateBtn = document.getElementById("reddwarf-translate-app");
   if (translateBtn) {
     translateBtn.remove();
