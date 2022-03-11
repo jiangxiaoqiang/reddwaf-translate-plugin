@@ -8,14 +8,8 @@
           @click="safeTranslate"
         ></button>
       </div>
-      <div
-        id="popper-container1"
-        class="bp3-elevation-4"
-      >
-        <div
-          id="translate-panel"
-          class="size-small"
-        >
+      <div id="popper-container1" class="bp3-elevation-4">
+        <div id="translate-panel" class="size-small">
           <div class="fixed">
             <div class="header">
               <div class="left">
@@ -105,11 +99,9 @@
                   class="bp3-button bp3-minimal bp3-small"
                   @click="addGlossary"
                 >
-                  <span
-                    icon="star-empty"
-                    aria-hidden="true"
+                  <span icon="star-empty" aria-hidden="true"
                     ><svg
-                      id = "collector-star"
+                      id="collector-star"
                       data-icon="star-empty"
                       width="14"
                       height="14"
@@ -119,8 +111,7 @@
                         d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
                         fill-rule="evenodd"
                       ></path></svg
-                  ></span>
-                  </button
+                  ></span></button
                 ><button
                   type="button"
                   class="bp3-button bp3-minimal bp3-small settings"
@@ -313,9 +304,7 @@
               </div>
             </div>
           </div>
-          <div class="body" style="">
-            
-          </div>
+          <div class="body" style=""></div>
         </div>
       </div>
     </div>
@@ -328,29 +317,31 @@ import {
   doAddGlossary,
   doTranslate,
   hideTransButton,
-  setTranslateResultPosition,
 } from "@/public/action/TransAction";
 import { MessageType } from "@/model/message/MessageType";
-import { defineComponent, computed } from "vue";
+import { defineComponent } from "vue";
 import { useStore } from "vuex";
+import LocalStorage from "js-wheel/dist/src/utils/data/LocalStorage";
+import { TransGlobal } from "@/model/immutable/TransGlobal";
 
 export default defineComponent({
   props: {
     word: String,
   },
   setup(props) {
-    const { getters, dispatch } = useStore();
+    const { dispatch } = useStore();
 
     if (props.word && props.word.trim().length > 0) {
       dispatch("Trans/setTransword", props.word.trim());
     }
 
-    const safeTranslate = (e: MouseEvent) => {
-      const transWord = computed(() => getters["Trans/getTransWord"]);
-      if (transWord && transWord.value && transWord.value.trim().length > 0) {
+    const safeTranslate = async (e: MouseEvent) => {
+      const transWord = await LocalStorage.readLocalStorage(
+        TransGlobal.REDDWARF_TRANSLATE_WORD
+      );
+      if (transWord && transWord && transWord.trim().length > 0) {
         hideTransButton();
-        doTranslate(transWord.value.trim(), MessageType.SELECTION_TRANSLATE);
-        setTranslateResultPosition(e);
+        doTranslate(transWord.trim(), MessageType.SELECTION_TRANSLATE);
       }
     };
 
@@ -358,10 +349,13 @@ export default defineComponent({
       closePopupWindow();
     };
 
-    const addGlossary = (e: MouseEvent) => {
-      const transWord = computed(() => getters["Trans/getTransWord"]);
-      if (transWord && transWord.value && transWord.value.trim().length > 0) {
-        doAddGlossary(transWord.value.trim(), MessageType.ADD_GLOSSARY);
+    const addGlossary = async (e: MouseEvent) => {
+      const transWord = await LocalStorage.readLocalStorage(
+        TransGlobal.REDDWARF_TRANSLATE_WORD
+      );
+
+      if (transWord && transWord && transWord.trim().length > 0) {
+        doAddGlossary(transWord.trim(), MessageType.ADD_GLOSSARY);
       }
     };
 
@@ -375,7 +369,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-
 #reddwarf-translate-app {
   z-index: 99999999999;
 }
@@ -470,7 +463,6 @@ export default defineComponent({
   align-items: center;
   padding: 4px 6px 4px 10px;
   border-bottom: 1px solid #d1d1d1;
-  
 }
 
 .bp3-dark #translate-panel .header {
@@ -678,7 +670,8 @@ export default defineComponent({
   touch-action: none;
   transition: opacity 0.2s;
   background-color: #f5f8fa;
-  visibility: hidden;
+  opacity: 1;
+  position:absolute;
 }
 
 .bp3-dark #popper-container {

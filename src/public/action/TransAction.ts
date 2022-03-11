@@ -35,22 +35,10 @@ export function doAddGlossary(transWord: string, messageType: MessageType) {
   }
 }
 
-export function setTranslateResultPosition(e: MouseEvent) {
-  let translateBtn = document.getElementById("popper-container1");
-  if (translateBtn) {
-    translateBtn.style.visibility = "hidden";
-    translateBtn.style.width = "140px";
-    translateBtn.style.zIndex = "999999999";
-    translateBtn.style.backgroundColor = "transparent";
-    translateBtn.style.height = "150px";
-    translateBtn.style.transform = "translate(" + e.pageX + "px," + e.pageY + "px)";
-  }
-}
-
 export async function showTranslateResultPanel(translation: string) {
   let translateBtn = document.getElementById("popper-container1");
   if (translateBtn) {
-    translateBtn.style.visibility = "visible";
+    translateBtn.style.setProperty("display","block","important");
     translateBtn.style.zIndex = "999999999";
     translateBtn.style.position = "absolute";
     let xAxios = await LocalStorage.readLocalStorage("pop-window-x-axios");
@@ -67,9 +55,11 @@ export function doChangeCollectorStatus() {
   }
 }
 
-export async function showSelectionTrans(translation: string) {
+export async function showSelectionTransResult(translation: string) {
   if (translation && translation.toString().trim().length > 0) {
     showTranslateResultPanel(translation);
+  }else{
+    showTranslateResultPanel("暂无翻译结果");
   }
 }
 
@@ -105,6 +95,10 @@ export async function addTransShowElement(translation: string) {
     app.use(store);
     let vm = app.mount("#uniq-anchor-point");
     document.body.appendChild(vm.$el);
+    let translatePanel = document.getElementById("popper-container1");
+    if (translatePanel) {
+      translatePanel.style.setProperty("display","none","important");
+    }
   }
 }
 
@@ -138,10 +132,16 @@ export async function showTranslateButton(e: MouseEvent) {
 }
 
 export function closePopupWindow() {
-  debugger;
   let translateBtn = document.getElementById("reddwarf-translate-app");
   if (translateBtn) {
-    translateBtn.remove();
+     // https://stackoverflow.com/questions/71428725/does-the-javascript-remove-really-removed-the-element
+    translateBtn.style.setProperty("display","none","important");
   }
 }
 
+export function showPopupWindow() {
+  let translateBtn = document.getElementById("reddwarf-translate-app");
+  if (translateBtn) {
+    translateBtn.style.setProperty("display","block");
+  }
+}

@@ -38,7 +38,6 @@ import {
   doAddGlossary, 
   doTranslate, 
   hideTransButton, 
-  setTranslateResultPosition 
 } from "@/public/action/TransAction";
 import { MessageType } from "@/model/message/MessageType";
 import { defineComponent, computed } from "vue";
@@ -60,7 +59,6 @@ export default defineComponent({
       if (transWord && transWord.value && transWord.value.trim().length > 0) {
         hideTransButton();
         doTranslate(transWord.value.trim(),MessageType.SELECTION_TRANSLATE);
-        setTranslateResultPosition(e);
       }
     };
 

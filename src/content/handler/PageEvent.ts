@@ -31,7 +31,7 @@ async function doSelect(selection: string, e: MouseEvent) {
   };
   await ConfigHandler.stupidInit(configBase);
   removeFirstMouseUp();
-  saveTransWord(selection.trim(), e);
+  saveTransWordToLocalStorage(selection.trim(), e);
 }
 
 export async function mouseClick(e: MouseEvent) {
@@ -69,9 +69,9 @@ function processDocumentClick(clickEvent: MouseEvent) {
 }
 
 
-function saveTransWord(transWord: string, e: MouseEvent) {
+function saveTransWordToLocalStorage(transWord: string, e: MouseEvent) {
   chrome.storage.local.set({
-    reddwarfTranslateWord: "reddwarf-translate-word"
+    [TransGlobal.REDDWARF_TRANSLATE_WORD]: transWord
   }, function () {
     addTransShowElement(transWord.toLowerCase());
     showTranslateButton(e);
